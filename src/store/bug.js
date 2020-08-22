@@ -29,7 +29,6 @@ const slice = createSlice({
 	}
 })
 
-// console.log(slice)
 export const {bugAdded,bugResolved} = slice.actions;
 export default slice.reducer;
 
