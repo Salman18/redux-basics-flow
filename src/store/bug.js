@@ -1,45 +1,51 @@
-import {createAction,createReducer} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 
-// const BUG_ADDED = 'bugAdded';
-// const BUG_REMOVED = 'bugRemoved';
-// const BUG_RESOLVED = 'bugResolved';
+/**
+ * A function that accepts an initial state, an object full of reducer
+ * functions, and a "slice name", and automatically generates
+ * action creators and action types that correspond to the
+ * reducers and state.
+ *
+ * The `reducer` argument is passed to `createReducer()`.
+ *
+ */
+let lastId = 0;
 
+const slice = createSlice({
+	name: "bugs",
+	initialState: [],
+	reducers: {
+		bugAdded: (state,action) => {
+			state.push({
+				id: ++lastId,
+				description: action.payload.description,
+				resolved: false
+			})
+		},
+		bugResolved: (state,action) => {
+			const index = state.findIndex(bug => bug.id === action.payload.id);
+			state[index].resolved = true;
+		}
+	}
+})
+
+// console.log(slice)
+export const {bugAdded,bugResolved} = slice.actions;
+export default slice.reducer;
 
 // Action Creators
+
+/*
 export const bugAdded = createAction('bugUpdated')
-// export const bugAdded = description => ({
-// 	type: BUG_ADDED,
-// 	payload: {
-// 		description
-// 	}
-// })
-
 export const bugRemoved = createAction('bugRemoved');
-// export const bugRemoved = id => ({
-// 	type: BUG_REMOVED,
-// 	payload: {
-// 		id
-// 	}
-// })
-
 export const bugResolved = createAction('bugResolved')
-// export const bugResolved = id => ({
-// 	type: BUG_RESOLVED,
-// 	payload: {
-// 		id
-// 	}
-// })
-
-// const bugUpdated = createAction('bugUpdated');
+const bugUpdated = createAction('bugUpdated');
+*/
 
 //Reducers
 
-//Mutable Way because it has immer in it
-
-let lastId = 0;
+/*
 export default createReducer([],{
-	//key: value
-	//action: function(even => eventHandler)
 	[bugAdded.type]: (state,action) => {
 		state.push({
 			id: ++lastId,
@@ -47,30 +53,9 @@ export default createReducer([],{
 			resolved: false
 		})
 	},
-	[bugResolved.type]: (state,actions) => {
-		const index = state.findIndex(bug => bug.id === actions.payload.id);
+	[bugResolved.type]: (state,action) => {
+		const index = state.findIndex(bug => bug.id === action.payload.id);
 		state[index].resolved = true;
 	}
 })
-
-//ImMutable Way because reducers are pure functions
-
-// export default function redcuer(state = [],action) {
-// 	switch(action.type) {
-// 		case bugAdded.type:
-// 			return [
-// 				...state,
-// 				{
-// 					id: ++lastId,
-// 					description: action.payload.description,
-// 					resolved: false
-// 				}
-// 			];
-// 		case bugRemoved.type:
-// 			return state.filter(bug => bug.id != action.payload.id);
-// 		case bugResolved.type:
-// 			return state.map(bug => bug.id !== action.payload.id ? bug : {...bug,resolved: true})
-// 		default:
-// 			return state;
-// 	}
-// }
+*/
