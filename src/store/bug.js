@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-
+import {createSelector} from 'reselect';
 /**
  * A function that accepts an initial state, an object full of reducer
  * functions, and a "slice name", and automatically generates
@@ -30,7 +30,13 @@ const slice = createSlice({
 })
 
 //Selector
-export const getUnresolvedBugs = state => state.entities.bugs.filter(bug => !bug.resolved)
+// export const getUnresolvedBugs = state => state.entities.bugs.filter(bug => !bug.resolved)
+
+//Memoization
+export const getUnresolvedBugs = createSelector(
+	state => state.entities.bugs,
+	bugs => bugs.filter(bug => !bug.resolved)
+)
 
 export const {bugAdded,bugResolved} = slice.actions;
 export default slice.reducer;
