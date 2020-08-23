@@ -1,11 +1,7 @@
 import {configureStore} from '@reduxjs/toolkit'
-// import reducer from './bug';
-import reducer from './project';
-
+import reducer from './reducer'
 
 export default function() {
-	// const store = createStore(redcuer,devToolsEnhancer({trace: true}));
-	// return store;
 	return configureStore({
 		reducer
 	});

@@ -31,30 +31,3 @@ const slice = createSlice({
 
 export const {bugAdded,bugResolved} = slice.actions;
 export default slice.reducer;
-
-// Action Creators
-
-/*
-export const bugAdded = createAction('bugUpdated')
-export const bugRemoved = createAction('bugRemoved');
-export const bugResolved = createAction('bugResolved')
-const bugUpdated = createAction('bugUpdated');
-*/
-
-//Reducers
-
-/*
-export default createReducer([],{
-	[bugAdded.type]: (state,action) => {
-		state.push({
-			id: ++lastId,
-			description: action.payload.description,
-			resolved: false
-		})
-	},
-	[bugResolved.type]: (state,action) => {
-		const index = state.findIndex(bug => bug.id === action.payload.id);
-		state[index].resolved = true;
-	}
-})
-*/
